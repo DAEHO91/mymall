@@ -16,13 +16,11 @@ public class MemberDao {
 	
 	//로그인 실패시 -> null
 	//로그인 성공시 -> 성공한 Member 객체
-	public Member login(Member member) {
+	public Member login(Connection connection, Member member) {
 		System.out.println("login 메서드 실행 MemberDao.java");
-        Member loginMember = new Member();
-		
+        Member loginMember = null;
+	
         try {
-        	connection = DBHelper.getConnection();
-        
             preparedStatement = connection.prepareStatement("SELECT id, level FROM member WHERE id=? AND pw=?");
             preparedStatement.setString(1, member.getId());
             preparedStatement.setString(2, member.getPw());
@@ -30,6 +28,7 @@ public class MemberDao {
             resultSet = preparedStatement.executeQuery();
             
             while(resultSet.next()) {
+            	loginMember = new Member();
             	loginMember.setId(resultSet.getString("id"));
             	loginMember.setLevel(resultSet.getInt("level"));
             }
@@ -39,7 +38,7 @@ public class MemberDao {
 		} finally {
 			DBHelper.close(connection, preparedStatement, resultSet);
 		}
-        	
+
 		return loginMember;
 	}
 	
@@ -90,7 +89,7 @@ public class MemberDao {
 		}
 		
 		return getMember;
-	};
+	}
 	
 	public void updateMember(Member member) {
 		System.out.println("updateMember 메서드 실행 MemberDao.java");
@@ -104,13 +103,37 @@ public class MemberDao {
             preparedStatement.setString(4, member.getId());
             
             preparedStatement.executeUpdate();
-	} catch (Exception e) {
-		e.printStackTrace();
-	} finally {
-		DBHelper.close(connection, preparedStatement, resultSet);
-	}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBHelper.close(connection, preparedStatement, resultSet);
+		}
 
-};
+	}
+	
+	public void deleteMember(Connection connection, Member member) {
+		System.out.println("deleteMember 메서드 실행 MemberDao.java");
+        try {
+	
+        	preparedStatement = connection.prepareStatement("SELECT no FROM member WHERE id=? AND pw=?");
+        	preparedStatement.setString(1, member.getId());
+        	preparedStatement.setString(2, member.getPw());
+        	resultSet = preparedStatement.executeQuery();
+        	
+        	
+        	
+        	preparedStatement = connection.prepareStatement("DELETE FROM member WHERE id=? AND pw=?");
+        	preparedStatement.setString(1, member.getId());
+        	preparedStatement.setString(2, member.getPw());
+		
+        	preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBHelper.close(connection, preparedStatement, resultSet);
+		}
+        	
+	}
 	
 	
 }

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.test.mymall.dao.MemberDao;
+import com.test.mymall.service.MemberService;
 import com.test.mymall.vo.Member;
 
 @WebServlet("/LoginController")
@@ -32,11 +33,15 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. ID, PASSWORD
 		System.out.println("doPost.... LoginController.java");
-		memberDao = new MemberDao();
+		//memberDao = new MemberDao();
+		MemberService memberService = new MemberService();
 		Member member = new Member();
+		
 		member.setId(request.getParameter("id"));
 		member.setPw(request.getParameter("pw"));
-		Member loginMember = memberDao.login(member);
+		
+		Member loginMember = memberService.login(member);
+		
 		if(loginMember!=null) {
 			System.out.println("로그인성공 loginController.java");
 			System.out.println(loginMember.getId()+"<<현재 로그인된 아이디 loginController.java");
@@ -45,7 +50,7 @@ public class LoginController extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request, response);
 		} else if(loginMember==null) {
 			System.out.println("로그인실패");
-			response.sendRedirect("/LoginController");
+			response.sendRedirect(request.getContextPath()+"/LoginController");
 		}
 	}
 

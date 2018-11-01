@@ -12,7 +12,7 @@ public class OrderListController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/*
-		 * MemberItemDao.getMemberItemList(int memberNo);
+		 * memberItemDao.getMemberItemList(int memberNo);
 		 */
 	}
 

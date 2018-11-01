@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MemberItemDao {
+	
 	// MemberItem INNER JOIN item
 	public ArrayList<HashMap<String, Object>> getMemberItemList(int memberNo) {
 		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
@@ -28,4 +29,10 @@ public class MemberItemDao {
 		
 		return null;
 	}
+	
+	
+	public void deleteMemberItem(int no) {
+		
+	}
+	
 }

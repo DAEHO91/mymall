@@ -91,4 +91,26 @@ public class MemberDao {
 		
 		return getMember;
 	};
+	
+	public void updateMember(Member member) {
+		System.out.println("updateMember 메서드 실행 MemberDao.java");
+        try {
+        	connection = DBHelper.getConnection();
+
+            preparedStatement = connection.prepareStatement("Update member SET pw=?, level=? WHERE no=? AND id=?");
+            preparedStatement.setString(1, member.getPw());
+            preparedStatement.setInt(2, member.getLevel());
+            preparedStatement.setInt(3, member.getNo());
+            preparedStatement.setString(4, member.getId());
+            
+            preparedStatement.executeUpdate();
+	} catch (Exception e) {
+		e.printStackTrace();
+	} finally {
+		DBHelper.close(connection, preparedStatement, resultSet);
+	}
+
+};
+	
+	
 }

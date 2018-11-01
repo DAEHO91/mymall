@@ -24,5 +24,7 @@
 			</c:choose>
 		</tr>	
 	</table>
+	<a href="${pageContext.request.contextPath}/UpdateMemberController">내정보수정</a>
+	<a href="${pageContext.request.contextPath}/IndexController">돌아가기</a>
 </body>
 </html>

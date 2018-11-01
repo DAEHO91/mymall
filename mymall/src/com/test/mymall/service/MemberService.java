@@ -18,6 +18,21 @@ public class MemberService {
 	PreparedStatement preparedStatement = null;
 	ResultSet resultSet = null;
 	
+	public void updateMember(Member member) {
+		System.out.println("updateMember 메서드... MemberService.java");
+		try {
+			connection = DBHelper.getConnection();
+			
+			memberDao = new MemberDao();
+			memberDao.updateMember(member);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBHelper.close(connection, preparedStatement, resultSet);
+		}
+	}
+	
+	
 	public Member selectMember(String id) {
 		
 		System.out.println("selectMember 메서드... MemberService.java");

@@ -8,12 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.test.mymall.dao.MemberDao;
+import com.test.mymall.service.MemberService;
 import com.test.mymall.vo.Member;
 
 @WebServlet("/UpdateMemberController")
 public class UpdateMemberController extends HttpServlet {
 
-	private MemberDao memberDao;
+	private MemberService memberService;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doGet...........UpdateMemberController.java");
@@ -24,14 +25,14 @@ public class UpdateMemberController extends HttpServlet {
 		System.out.println("doPost...........UpdateMemberController.java");
 		
 		Member member = new Member();
-		memberDao = new MemberDao(); 
+		memberService = new MemberService(); 
 		
 		member.setNo(Integer.parseInt(request.getParameter("no")));
 		member.setId(request.getParameter("id"));
 		member.setPw(request.getParameter("pw"));
 		member.setLevel(Integer.parseInt(request.getParameter("level")));
 		
-		memberDao.updateMember(member);
+		memberService.updateMember(member);
 		
 		response.sendRedirect(request.getContextPath()+"/GetMemberController");
 	}

@@ -12,7 +12,7 @@
 		${loginMember.getId()}님 반갑습니다.
 		<!-- 미구현 -->
 		<a href="${pageContext.request.contextPath}/GetMember">내정보보기</a> 
-		<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
+		<a href="${pageContext.request.contextPath}/LogoutController">로그아웃</a>
 	</c:if>
 	<c:if test="${loginMember == null}">
 		<a href="${pageContext.request.contextPath}/LoginController">로그인</a>

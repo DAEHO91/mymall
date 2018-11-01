@@ -46,7 +46,6 @@ public class MemberDao {
 	
 	public void insertMember(Member member) {
 		System.out.println("insertMember 메서드 실행 MemberDao.java");
-
         
         try {
         	connection = DBHelper.getConnection();
@@ -63,7 +62,33 @@ public class MemberDao {
 		} finally {
 			DBHelper.close(connection, preparedStatement, resultSet);
 		}
- 
-		
 	}
+	
+	public Member selectMember(String id) {
+		System.out.println("selectMember 메서드 실행 MemberDao.java");
+		Member getMember = new Member();
+		
+        try {
+        	connection = DBHelper.getConnection();
+
+            preparedStatement = connection.prepareStatement("SELECT no, id, pw, level FROM member WHERE id=?");
+            preparedStatement.setString(1, id);
+            
+            resultSet = preparedStatement.executeQuery();
+            
+            while(resultSet.next()) {
+            	getMember.setNo(resultSet.getInt("no"));
+            	getMember.setId(resultSet.getString("id"));
+            	getMember.setPw(resultSet.getString("pw"));
+            	getMember.setLevel(resultSet.getInt("level"));
+            }
+        	
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBHelper.close(connection, preparedStatement, resultSet);
+		}
+		
+		return getMember;
+	};
 }

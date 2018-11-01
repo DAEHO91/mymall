@@ -29,7 +29,7 @@ public class AddMemberController extends HttpServlet {
 		member.setPw(request.getParameter("pw"));	
 		member.setLevel(Integer.parseInt(request.getParameter("level")));
 		memberDao.insertMember(member);
-		response.sendRedirect(request.getContextPath()+"/login");
+		response.sendRedirect(request.getContextPath()+"/LoginController");
 	}
 
 }

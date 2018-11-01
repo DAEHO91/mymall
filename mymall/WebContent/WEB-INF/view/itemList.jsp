@@ -16,9 +16,9 @@
 		
 		<c:forEach var="item" items="${list}">
 		<tr>
-			<td>${item.no}</td><!-- item.getNo() -->
-			<td>${item.name}</td>
-			<td>${item.price}</td>
+			<td>${list.no}</td><!-- item.getNo() -->
+			<td>${list.name}</td>
+			<td>${list.price}</td>
 			<td><a href="${pageContext.request.contextPath}/Order">주문</a></td>
 		</tr>
 		</c:forEach>

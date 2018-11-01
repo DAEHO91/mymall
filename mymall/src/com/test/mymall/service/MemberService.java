@@ -18,6 +18,26 @@ public class MemberService {
 	PreparedStatement preparedStatement = null;
 	ResultSet resultSet = null;
 	
+	public Member selectMember(String id) {
+		
+		System.out.println("selectMember 메서드... MemberService.java");
+		Member selectMember = new Member();
+		try {
+			connection = DBHelper.getConnection();
+			
+			memberDao = new MemberDao();
+			selectMember = memberDao.selectMember(connection, id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBHelper.close(connection, preparedStatement, resultSet);
+		}
+		
+		return selectMember;
+	}
+	
+	
+	
 	public void deleteMember(Member member) {
 		System.out.println("deleteMember 메서드... MemberService.java");
 		try {
@@ -46,6 +66,8 @@ public class MemberService {
 		}
 	}
 	
+	
+	
 	public Member login(Member member) {
 		System.out.println("login 메서드... MemberService.java");
 		memberDao = new MemberDao();
@@ -64,13 +86,14 @@ public class MemberService {
 	}
 	
 	
+	
 	public void addMember(Member member) {
 		System.out.println("addMember 메서드... MemberService.java");
 		memberDao = new MemberDao();
 		
 		try {
 			connection = DBHelper.getConnection();
-			memberDao.insertMember(member);
+			memberDao.insertMember(connection, member);
 		}  catch (Exception e) {
 			e.printStackTrace();
 		} finally {

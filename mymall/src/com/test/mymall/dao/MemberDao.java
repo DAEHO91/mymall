@@ -43,12 +43,10 @@ public class MemberDao {
 	}
 	
 	
-	public void insertMember(Member member) {
+	public void insertMember(Connection connection, Member member) {
 		System.out.println("insertMember 메서드 실행 MemberDao.java");
         
         try {
-        	connection = DBHelper.getConnection();
-        	
             preparedStatement = connection.prepareStatement("INSERT INTO member (id, pw, level) VALUE (?, ?, ?)");
             preparedStatement.setString(1, member.getId());
             preparedStatement.setString(2, member.getPw());
@@ -63,13 +61,11 @@ public class MemberDao {
 		}
 	}
 	
-	public Member selectMember(String id) {
+	public Member selectMember(Connection connection, String id) {
 		System.out.println("selectMember 메서드 실행 MemberDao.java");
 		Member getMember = new Member();
 		
         try {
-        	connection = DBHelper.getConnection();
-
             preparedStatement = connection.prepareStatement("SELECT no, id, pw, level FROM member WHERE id=?");
             preparedStatement.setString(1, id);
             

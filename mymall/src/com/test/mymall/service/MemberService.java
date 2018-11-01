@@ -54,7 +54,6 @@ public class MemberService {
 		try {
 			connection = DBHelper.getConnection();
 			loginmember = memberDao.login(connection, member);
-			System.out.println(loginmember.getId()+"<<<<<<<<");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -66,8 +65,16 @@ public class MemberService {
 	
 	
 	public void addMember(Member member) {
+		System.out.println("addMember ¸Þ¼­µå... MemberService.java");
 		memberDao = new MemberDao();
-		memberDao.insertMember(member);
+		
+		try {
+			connection = DBHelper.getConnection();
+			memberDao.insertMember(member);
+		}  catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBHelper.close(connection, preparedStatement, resultSet);
+		}	
 	}
-
 }

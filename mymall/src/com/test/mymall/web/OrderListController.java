@@ -7,10 +7,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/IndexController")
-public class IndexController extends HttpServlet {
+@WebServlet("/OrderListController")
+public class OrderListController extends HttpServlet {
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("IndexController.doGet() IndexController.java");
-		request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request, response);
+		/*
+		 * MemberItemDao.getMemberItemList(int memberNo);
+		 */
 	}
+
 }

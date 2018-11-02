@@ -9,6 +9,8 @@ import java.util.HashMap;
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
+
 import com.test.mymal.commons.DBHelper;
 import com.test.mymall.dao.MemberItemDao;
 import com.test.mymall.vo.Member;
@@ -17,6 +19,7 @@ public class MemberItemService {
 
 	private MemberItemDao memberItemDao;
 	
+	SqlSession sqlSession = null;
 	Connection connection = null;
 	PreparedStatement preparedStatement = null;
 	ResultSet resultSet = null;
@@ -28,16 +31,16 @@ public class MemberItemService {
 		
 		
 		try {
-			connection = DBHelper.getConnection();
+			sqlSession = DBHelper.getSqlSession();
 			
 			memberItemDao = new MemberItemDao();
-			list = memberItemDao.orderList(connection, member);
+			list = memberItemDao.orderList(sqlSession, member);
 			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			DBHelper.close(connection, preparedStatement, resultSet);
+			sqlSession.close();
 		}	
 		
 		return list;

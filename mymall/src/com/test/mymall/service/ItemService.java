@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.ibatis.session.SqlSession;
+
 import com.test.mymal.commons.DBHelper;
 import com.test.mymall.dao.ItemDao;
 import com.test.mymall.dao.MemberItemDao;
@@ -17,6 +19,7 @@ public class ItemService {
 	private ItemDao itemDao;
 	private MemberItemDao memberItemDao;
 	
+	SqlSession sqlSession = null;
 	Connection connection = null;
 	PreparedStatement preparedStatement = null;
 	ResultSet resultSet = null;
@@ -26,15 +29,15 @@ public class ItemService {
 		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
 		
 		try {
-			connection = DBHelper.getConnection();
+			sqlSession = DBHelper.getSqlSession();
 			
 			itemDao = new ItemDao();
-			list = itemDao.itemList(connection);
+			list = itemDao.itemList(sqlSession);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			DBHelper.close(connection, preparedStatement, resultSet);
+			sqlSession.close();
 		}	
 		
 		return list;
@@ -44,14 +47,14 @@ public class ItemService {
 		System.out.println("Order ¸Þ¼­µå... ItemService.java");
 		
 		try {
-			connection = DBHelper.getConnection();
+			sqlSession = DBHelper.getSqlSession();
 			
 			memberItemDao = new MemberItemDao();
-			memberItemDao.order(connection, memberItem);
+			memberItemDao.order(sqlSession, memberItem);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			DBHelper.close(connection, preparedStatement, resultSet);
+			sqlSession.close();
 		}
 		
 	}

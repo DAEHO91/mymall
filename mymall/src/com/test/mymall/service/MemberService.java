@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.ibatis.session.SqlSession;
+
 import com.test.mymal.commons.DBHelper;
 import com.test.mymall.dao.MemberDao;
 import com.test.mymall.dao.MemberItemDao;
@@ -14,21 +16,21 @@ public class MemberService {
 
 	private MemberDao memberDao;
 	private MemberItemDao memberItemDao;
-	Connection connection = null;
+	SqlSession sqlSession = null;
 	PreparedStatement preparedStatement = null;
 	ResultSet resultSet = null;
 	
 	public void updateMember(Member member) {
 		System.out.println("updateMember 메서드... MemberService.java");
 		try {
-			connection = DBHelper.getConnection();
+			sqlSession = DBHelper.getSqlSession();
 			
 			memberDao = new MemberDao();
-			memberDao.updateMember(connection, member);
+			memberDao.updateMember(sqlSession, member);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			DBHelper.close(connection, preparedStatement, resultSet);
+			sqlSession.close();
 		}
 	}
 	
@@ -38,14 +40,14 @@ public class MemberService {
 		System.out.println("selectMember 메서드... MemberService.java");
 		Member selectMember = new Member();
 		try {
-			connection = DBHelper.getConnection();
+			sqlSession = DBHelper.getSqlSession();
 			
 			memberDao = new MemberDao();
-			selectMember = memberDao.selectMember(connection, id);
+			selectMember = memberDao.selectMember(sqlSession, id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			DBHelper.close(connection, preparedStatement, resultSet);
+			sqlSession.close();
 		}
 		
 		return selectMember;
@@ -57,35 +59,35 @@ public class MemberService {
 		System.out.println("deleteMember 메서드... MemberService.java");
 		boolean check= false;
 		try {
-			connection = DBHelper.getConnection();
+			sqlSession = DBHelper.getSqlSession();
 			// 자동커밋false
-			connection.setAutoCommit(false);
+			//sqlSession.setAutoCommit(false);
 
 			memberDao = new MemberDao();
 			memberItemDao = new MemberItemDao();
 
-			check = memberDao.deleteCheckMember(connection, member);
+			check = memberDao.deleteCheckMember(sqlSession, member);
 			//비밀번호 틀릴시 false 로 실행되지않음
 			if(check) {
-				memberItemDao.deleteMemberItem(connection, member);
-				memberDao.deleteMember(connection, member);
+				memberItemDao.deleteMemberItem(sqlSession, member);
+				memberDao.deleteMember(sqlSession, member);
 			}
 
 			//commit
-			connection.commit();
+			sqlSession.commit();
 
 		} catch(Exception e) {
 			try {
 				// 문제 발생시 롤백..
-				connection.rollback();
+				sqlSession.rollback();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			} finally {
-				DBHelper.close(connection, preparedStatement, resultSet);
+				sqlSession.close();
 			}
 			e.printStackTrace();
 		} finally {
-			DBHelper.close(connection, preparedStatement, resultSet);
+			sqlSession.close();
 		}
 		
 		return check;
@@ -99,13 +101,13 @@ public class MemberService {
 		Member loginmember = new Member();
 		
 		try {
-			connection = DBHelper.getConnection();
-			loginmember = memberDao.login(connection, member);
+			sqlSession = DBHelper.getSqlSession();
+			loginmember = memberDao.login(sqlSession, member);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			DBHelper.close(connection, preparedStatement, resultSet);
+			sqlSession.close();
 		}
 		return loginmember;
 	}
@@ -115,14 +117,15 @@ public class MemberService {
 	public void addMember(Member member) {
 		System.out.println("addMember 메서드... MemberService.java");
 		memberDao = new MemberDao();
-		
 		try {
-			connection = DBHelper.getConnection();
-			memberDao.insertMember(connection, member);
+			sqlSession = DBHelper.getSqlSession();
+			memberDao.insertMember(sqlSession, member);
+			sqlSession.commit();
+			
 		}  catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			DBHelper.close(connection, preparedStatement, resultSet);
+			sqlSession.close();
 		}	
 	}
 }

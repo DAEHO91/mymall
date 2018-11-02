@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+  
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED"> <!-- connection을 여러개 가져올 수 있음..찾아봐야함 -->
+        <property name="driver" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/mall?useUnicode=true&amp;characterEncoding=euckr"/>
+        <property name="username" value="root"/>
+        <property name="password" value="java0000"/>
+      </dataSource>
+    </environment>
+  </environments>
+  
+  <!-- 쿼리가 모여있는 파일을 mapper라 부름 -->
+  <mappers>
+    <mapper resource="com/test/mymall/dao/MemberMapper.xml"/>
+  </mappers>
+  
+</configuration>

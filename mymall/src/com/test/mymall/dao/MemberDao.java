@@ -68,6 +68,9 @@ public class MemberDao {
             getMember.setLevel(resultSet.getInt("level"));
         }
 	
+        preparedStatement.close();
+        resultSet.close();
+        
 		return getMember;
 	}
 	
@@ -81,18 +84,42 @@ public class MemberDao {
         preparedStatement.setString(4, member.getId());
             
         preparedStatement.executeUpdate();
+        
+        preparedStatement.close();
 
 	}
 	
 	public void deleteMember(Connection connection, Member member) throws SQLException {
 		System.out.println("deleteMember 메서드 실행 MemberDao.java");
 		
-		preparedStatement = connection.prepareStatement("DELETE FROM member WHERE id=? AND pw=?");
-        preparedStatement.setString(1, member.getId());
-        preparedStatement.setString(2, member.getPw());
+		preparedStatement = connection.prepareStatement("DELETE FROM member WHERE id=?");
+        preparedStatement.setString(1, member.getId()); 
 		
         preparedStatement.executeUpdate();
+        
+        preparedStatement.close();
+
         	
+	}
+	
+	public boolean deleteCheckMember(Connection connection, Member member) throws SQLException  {
+		System.out.println("deleteCheckMember 메서드 실행 MemberDao.java");
+		boolean check = false;
+		
+		preparedStatement = connection.prepareStatement("SELECT id FROM member WHERE id=? AND pw=?");
+		preparedStatement.setString(1, member.getId()); 
+		preparedStatement.setString(2, member.getPw()); 
+		
+		resultSet = preparedStatement.executeQuery();
+		
+		while(resultSet.next()) {
+			check = true;
+		}
+		
+        preparedStatement.close();
+        resultSet.close();
+		
+		return check;
 	}
 	
 	

@@ -34,9 +34,13 @@ public class DeleteMemberController extends HttpServlet {
 		member.setNo(loginMember.getNo());
 		member.setPw(request.getParameter("pw"));
 		
-		memberService.deleteMember(member);
+		boolean check = memberService.deleteMember(member);
 		
-		response.sendRedirect(request.getContextPath()+"/LogoutController");
+		if(check) {
+			response.sendRedirect(request.getContextPath()+"/LogoutController");
+		} else {
+			response.sendRedirect(request.getContextPath()+"/DeleteMemberController");
+		}
 	}
 
 }

@@ -53,8 +53,9 @@ public class MemberService {
 	
 	
 	
-	public void deleteMember(Member member) {
+	public boolean deleteMember(Member member) {
 		System.out.println("deleteMember 메서드... MemberService.java");
+		boolean check= false;
 		try {
 			connection = DBHelper.getConnection();
 			// 자동커밋false
@@ -63,8 +64,12 @@ public class MemberService {
 			memberDao = new MemberDao();
 			memberItemDao = new MemberItemDao();
 
-			memberItemDao.deleteMemberItem(connection, member);
-			memberDao.deleteMember(connection, member);
+			check = memberDao.deleteCheckMember(connection, member);
+			//비밀번호 틀릴시 false 로 실행되지않음
+			if(check) {
+				memberItemDao.deleteMemberItem(connection, member);
+				memberDao.deleteMember(connection, member);
+			}
 
 			//commit
 			connection.commit();
@@ -82,6 +87,8 @@ public class MemberService {
 		} finally {
 			DBHelper.close(connection, preparedStatement, resultSet);
 		}
+		
+		return check;
 	}
 	
 	

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.test.mymall.service.ItemService;
 
-@WebServlet("/itemList")
+@WebServlet("/itemListController")
 public class itemList extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,9 +25,6 @@ public class itemList extends HttpServlet {
 		
 		session.setAttribute("list", list);
 
-		System.out.println(list.get(1).get("name"));
-	
-		
 		request.getRequestDispatcher("/WEB-INF/view/itemList.jsp").forward(request, response);
 	}
 

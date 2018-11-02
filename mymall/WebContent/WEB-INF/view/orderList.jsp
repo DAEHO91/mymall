@@ -8,19 +8,21 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>상품 목록</h1>
-	<!-- 주문하기 item pk, session member pk,  -->
+
+	<h1>주문 리스트</h1>
 	<table border="1">
 		<tr>
-			<th>번호</th><th>이름</th><th>가격</th><th>주문</th>
+			<th>주문번호</th><th>주문자</th><th>주문날짜</th><th>상품코드</th><th>상품명</th><th>가격</th>
 		</tr>
 		<!-- list 객체를 item이름으로 사용.. forEach는 자동증가 -->
-		<c:forEach var="item" items="${list}" varStatus="status">
+		<c:forEach var="orderList" items="${orderList}" varStatus="status">
 		<tr>
-			<td>${item.get("no")}</td><!-- item.getNo() -->
-			<td>${item.get("name")}</td>
-			<td>${item.get("price")}</td>
-			<td><a href="${pageContext.request.contextPath}/OrderController?itemNo=${item.get("no")}">주문</a></td>
+			<td>${orderList.get("no")}</td><!-- item.getNo() -->
+			<td>${orderList.get("id")}</td>
+			<td>${orderList.get("order_date")}</td>
+			<td>${orderList.get("item_no")}</td>
+			<td>${orderList.get("name")}</td>
+			<td>${orderList.get("price")}</td>
 		</tr>
 		</c:forEach>	
 	</table>

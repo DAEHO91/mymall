@@ -10,6 +10,7 @@ import com.test.mymal.commons.DBHelper;
 import com.test.mymall.dao.ItemDao;
 import com.test.mymall.dao.MemberItemDao;
 import com.test.mymall.vo.Item;
+import com.test.mymall.vo.MemberItem;
 
 public class ItemService {
 
@@ -34,10 +35,26 @@ public class ItemService {
 			e.printStackTrace();
 		} finally {
 			DBHelper.close(connection, preparedStatement, resultSet);
-		}
-			
+		}	
 		
 		return list;
 	}
+	
+	public void Order(MemberItem memberItem) {
+		System.out.println("Order ¸Þ¼­µå... ItemService.java");
+		
+		try {
+			connection = DBHelper.getConnection();
+			
+			memberItemDao = new MemberItemDao();
+			memberItemDao.order(connection, memberItem);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBHelper.close(connection, preparedStatement, resultSet);
+		}
+		
+	}
+	
 	
 }

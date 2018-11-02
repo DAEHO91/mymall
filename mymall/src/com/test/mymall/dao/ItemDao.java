@@ -29,7 +29,6 @@ public class ItemDao {
             	map.put("name", resultSet.getString("name"));
             	map.put("price", resultSet.getString("price"));
             	list.add(map);
-            	System.out.println(map.get("name")+"<<<<< 루프내부값");
             }
             
         } catch (Exception e) {

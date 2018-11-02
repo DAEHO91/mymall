@@ -5,6 +5,7 @@ public class Member {
 	private String id;
 	private String pw;
 	private int level;
+	
 	public int getNo() {
 		return no;
 	}

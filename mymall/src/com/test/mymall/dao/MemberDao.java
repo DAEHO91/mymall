@@ -21,7 +21,7 @@ public class MemberDao {
         Member loginMember = null;
 	
         try {
-            preparedStatement = connection.prepareStatement("SELECT id, level FROM member WHERE id=? AND pw=?");
+            preparedStatement = connection.prepareStatement("SELECT no, id, level FROM member WHERE id=? AND pw=?");
             preparedStatement.setString(1, member.getId());
             preparedStatement.setString(2, member.getPw());
             
@@ -29,6 +29,7 @@ public class MemberDao {
             
             while(resultSet.next()) {
             	loginMember = new Member();
+            	loginMember.setNo(resultSet.getInt("no"));
             	loginMember.setId(resultSet.getString("id"));
             	loginMember.setLevel(resultSet.getInt("level"));
             }

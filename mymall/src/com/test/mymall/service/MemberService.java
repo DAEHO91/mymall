@@ -24,7 +24,7 @@ public class MemberService {
 			connection = DBHelper.getConnection();
 			
 			memberDao = new MemberDao();
-			memberDao.updateMember(member);
+			memberDao.updateMember(connection, member);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -57,18 +57,21 @@ public class MemberService {
 		System.out.println("deleteMember 메서드... MemberService.java");
 		try {
 			connection = DBHelper.getConnection();
+			// 자동커밋false
 			connection.setAutoCommit(false);
-			// 1. 첫번째기능
+
 			memberDao = new MemberDao();
-			memberDao.deleteMember(connection, member);
-			// 2. 두번째기능
 			memberItemDao = new MemberItemDao();
-			//memberItemDao.deleteMemberItem(connection, null);
-			
+
+			memberItemDao.deleteMemberItem(connection, member);
+			memberDao.deleteMember(connection, member);
+
+			//commit
 			connection.commit();
 
 		} catch(Exception e) {
 			try {
+				// 문제 발생시 롤백..
 				connection.rollback();
 			} catch (SQLException e1) {
 				e1.printStackTrace();

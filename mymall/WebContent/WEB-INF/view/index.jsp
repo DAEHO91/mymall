@@ -14,6 +14,7 @@
 		<a href="${pageContext.request.contextPath}/LogoutController">로그아웃</a>
 		<a href="${pageContext.request.contextPath}/itemListController">상품보기</a>
 		<a href="${pageContext.request.contextPath}/OrderListController">주문내역보기</a>
+		<a href="${pageContext.request.contextPath}/DeleteMemberController">회원탈퇴</a>
 	</c:if>
 	<c:if test="${loginMember == null}">
 		<a href="${pageContext.request.contextPath}/LoginController">로그인</a>

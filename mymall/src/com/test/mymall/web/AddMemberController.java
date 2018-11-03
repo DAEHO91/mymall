@@ -19,11 +19,11 @@ public class AddMemberController extends HttpServlet {
 	private MemberService memberService;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doGet()메서드 AddMemberController.java");
+		System.out.println("doGet() AddMemberController.java");
 		request.getRequestDispatcher("/WEB-INF/view/addMember.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doPost()메서드 AddMemberController.java");
+		System.out.println("doPost() AddMemberController.java");
 		
 		Member member = new Member();
 		memberService = new MemberService();

@@ -21,12 +21,13 @@ public class MemberService {
 	ResultSet resultSet = null;
 	
 	public void updateMember(Member member) {
-		System.out.println("updateMember ¸Þ¼­µå... MemberService.java");
+		System.out.println("updateMember  Method Access ... MemberService.java");
 		try {
 			sqlSession = DBHelper.getSqlSession();
 			
 			memberDao = new MemberDao();
 			memberDao.updateMember(sqlSession, member);
+			sqlSession.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -37,7 +38,7 @@ public class MemberService {
 	
 	public Member selectMember(String id) {
 		
-		System.out.println("selectMember ¸Þ¼­µå... MemberService.java");
+		System.out.println("selectMember  Method Access ... MemberService.java");
 		Member selectMember = new Member();
 		try {
 			sqlSession = DBHelper.getSqlSession();
@@ -56,32 +57,30 @@ public class MemberService {
 	
 	
 	public boolean deleteMember(Member member) {
-		System.out.println("deleteMember ¸Þ¼­µå... MemberService.java");
+		System.out.println("deleteMember  Method Access ... MemberService.java");
 		boolean check= false;
 		try {
 			sqlSession = DBHelper.getSqlSession();
-			// ÀÚµ¿Ä¿¹Ôfalse
+			// ï¿½Úµï¿½Ä¿ï¿½ï¿½false
 			//sqlSession.setAutoCommit(false);
 
 			memberDao = new MemberDao();
 			memberItemDao = new MemberItemDao();
 
 			check = memberDao.deleteCheckMember(sqlSession, member);
-			//ºñ¹Ð¹øÈ£ Æ²¸±½Ã false ·Î ½ÇÇàµÇÁö¾ÊÀ½
+			//login check
 			if(check) {
 				memberItemDao.deleteMemberItem(sqlSession, member);
 				memberDao.deleteMember(sqlSession, member);
 			}
-
-			//commit
+			
 			sqlSession.commit();
+			System.out.println(check+"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<java");
 
 		} catch(Exception e) {
 			try {
-				// ¹®Á¦ ¹ß»ý½Ã ·Ñ¹é..
+				// ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ï¿½ ï¿½Ñ¹ï¿½..
 				sqlSession.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
 			} finally {
 				sqlSession.close();
 			}
@@ -96,7 +95,7 @@ public class MemberService {
 	
 	
 	public Member login(Member member) {
-		System.out.println("login ¸Þ¼­µå... MemberService.java");
+		System.out.println("login  Method Access ... MemberService.java");
 		memberDao = new MemberDao();
 		Member loginmember = new Member();
 		
@@ -115,7 +114,7 @@ public class MemberService {
 	
 	
 	public void addMember(Member member) {
-		System.out.println("addMember ¸Þ¼­µå... MemberService.java");
+		System.out.println("addMember  Method Access ... MemberService.java");
 		memberDao = new MemberDao();
 		try {
 			sqlSession = DBHelper.getSqlSession();

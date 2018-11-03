@@ -19,7 +19,7 @@ public class ItemDao {
 
 	
 	public List<HashMap<String, Object>> itemList(SqlSession sqlSession) throws SQLException {
-		System.out.println("itemList 메서드 실행 ItemDao.java");
+		System.out.println("itemList Method Access ItemDao.java");
 		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
 
 		List<Item> list = sqlSession.selectList("com.test.mymall.dao.ItemMapper.selectItemList");

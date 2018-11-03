@@ -15,7 +15,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class DBHelper {
 	public static SqlSession getSqlSession() throws Exception{
-    	System.out.println("DB연결실행 MemberDao.java");
+    	System.out.println("DB Connection MemberDao.java");
     	
     	InputStream inputStream = null;
     	  

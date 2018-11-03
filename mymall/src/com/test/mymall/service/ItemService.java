@@ -25,7 +25,7 @@ public class ItemService {
 	ResultSet resultSet = null;
 	
 	public ArrayList<HashMap<String, Object>> itemList(){
-		System.out.println("itemList 메서드... ItemService.java");
+		System.out.println("itemList Method Access ... ItemService.java");
 		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
 		
 		try {
@@ -44,7 +44,7 @@ public class ItemService {
 	}
 	
 	public void Order(MemberItem memberItem) {
-		System.out.println("Order 메서드... ItemService.java");
+		System.out.println("Order  Method Access ... ItemService.java");
 		
 		try {
 			sqlSession = DBHelper.getSqlSession();

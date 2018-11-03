@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mymall.dao.MemberItemMapper">
+	<delete id="deleteMemberItem" parameterType="com.test.mymall.vo.Member">
+		DELETE FROM member_item WHERE member_no=#{no}
+	</delete>
+</mapper>

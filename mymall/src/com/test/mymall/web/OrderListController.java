@@ -18,13 +18,13 @@ import com.test.mymall.vo.Member;
 public class OrderListController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doGet()¸Þ¼­µå OrderList.java");
+		System.out.println("doGet() OrderList.java");
 		
 		HttpSession session = request.getSession();
 		Member member = (Member)session.getAttribute("loginMember");
 		MemberItemService memberItemService = new MemberItemService();
 		
-		// È¸¿ø±ÇÇÑÀ» ÀÔ·Â¹Þ¾Æ °ü¸®ÀÚÀÏ°æ¿ì ¸ðµç ÁÖ¹®³»¿ª Á¶È¸, °í°´ÀÏ°æ¿ì ÀÚ½ÅÀÇ ÁÖ¹®³»¿ª¸¸ Á¶È¸
+		// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·Â¹Þ¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸, ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 		ArrayList<HashMap<String, Object>> list = memberItemService.orderList(member);
 		
 		session.setAttribute("orderList", list);

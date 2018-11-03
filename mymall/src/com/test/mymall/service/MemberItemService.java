@@ -26,7 +26,7 @@ public class MemberItemService {
 	
 	
 	public ArrayList<HashMap<String, Object>> orderList(Member member) {
-		System.out.println("orderList ¸Þ¼­µå... MemberItemService.java");
+		System.out.println("orderList  Method Access ... MemberItemService.java");
 		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
 		
 		

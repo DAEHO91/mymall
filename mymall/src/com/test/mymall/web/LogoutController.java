@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 public class LogoutController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("로그아웃 처리 LogoutController.java");
+		System.out.println("doget...... LogoutController.java");
 		request.getSession().invalidate();
 		response.sendRedirect(request.getContextPath()+"/IndexController"); //
 	}

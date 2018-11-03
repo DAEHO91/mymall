@@ -1,26 +1,26 @@
-1. ¸ÞÀÎÆäÀÌÁö
+1. ë©”ì¸íŽ˜ì´ì§€
 C indexController.doGet - > V index.jsp
 
-2. È¸¿ø°¡ÀÔÆû
+2. íšŒì›ê°€ìž…í¼
 C addMember.doGet - > V addMember.jsp
 
-3. È¸¿ø°¡ÀÔ¾×¼Ç
+3. íšŒì›ê°€ìž…ì•¡ì…˜
 C addMember.doPost - > M memberDao.insertMember() - > c login
 
 
-4. ·Î±×ÀÎÆû
+4. ë¡œê·¸ì¸í¼
 c login.doGet - v login.jsp
 
-5. ·Î±×ÀÎ ¾×¼Ç
-c login.doget-> m memberDao.login() - ¼º°ø c index
-					½ÇÆÐ c login
+5. ë¡œê·¸ì¸ ì•¡ì…˜
+c login.doget-> m memberDao.login() - ì„±ê³µ c index
+					ì‹¤íŒ¨ c login
 					
 
 					
 11/1 AM
-¼¼¼Ç ·Î±×ÀÎ Á¤º¸ ¼öÁ¤
-ÁÖ¹®
-ÁÖ¹® ¸®½ºÆ®(Á¶ÀÎÈ°¿ë)
+ì„¸ì…˜ ë¡œê·¸ì¸ ì •ë³´ ìˆ˜ì •
+ì£¼ë¬¸
+ì£¼ë¬¸ ë¦¬ìŠ¤íŠ¸(ì¡°ì¸í™œìš©)
 
 11/2 PM
-service °èÃþ »ç¿ë : Æ®·£Àè¼Ç Ã³¸® È¸¿ø»èÁ¦->ÁÖ¹®»èÁ¦ 
+service ê³„ì¸µ ì‚¬ìš© : íŠ¸ëžœìž­ì…˜ ì²˜ë¦¬ íšŒì›ì‚­ì œ->ì£¼ë¬¸ì‚­ì œ 

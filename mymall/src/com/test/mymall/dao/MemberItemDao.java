@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.ibatis.session.SqlSession;
+
 import com.test.mymall.vo.Member;
 import com.test.mymall.vo.MemberItem;
 
@@ -17,18 +19,13 @@ public class MemberItemDao {
     ResultSet resultSet = null;
 	
 	
-	public void deleteMemberItem(Connection connection, Member member) throws SQLException {
-		System.out.println("deleteMemberItem ¸Þ¼­µå ½ÇÇà MemberItemDao.java");
-
-	    preparedStatement = connection.prepareStatement("DELETE FROM member_item WHERE member_no=?");
-	    preparedStatement.setInt(1, member.getNo());
-	    	
-	    preparedStatement.executeUpdate();
-		
+	public void deleteMemberItem(SqlSession sqlSession, Member member) throws SQLException {
+		System.out.println("deleteMemberItem Method Access MemberItemDao.java");
+		sqlSession.delete("com.test.mymall.dao.MemberItemMapper.deleteMemberItem", member);
 	}
 	
 	public void order(Connection connection, MemberItem memberItem) throws SQLException {
-		System.out.println("order ¸Þ¼­µå ½ÇÇà MemberItemDao.java");
+		System.out.println("order Method Access MemberItemDao.java");
 
         preparedStatement = connection.prepareStatement("INSERT INTO member_item (member_no, item_no, order_date) VALUE (?, ?, now())");
         preparedStatement.setInt(1, memberItem.getMember_no());
@@ -38,15 +35,15 @@ public class MemberItemDao {
 	}
 	
 	public ArrayList<HashMap<String, Object>> orderList(Connection connection, Member member) throws SQLException {
-		System.out.println("orderList ¸Þ¼­µå ½ÇÇà MemberItemDao.java");
+		System.out.println("orderList Method Access MemberItemDao.java");
 		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
 
-		if(member.getLevel()==0) { //°í°´.. ÀÚ½ÅÀÇ ÁÖ¹®¸®½ºÆ®¸¸ Á¶È¸
-			System.out.println("0ÀÇ Á¶°Ç½ÇÇà MemberItemDao.java");
+		if(member.getLevel()==0) { //ï¿½ï¿½.. ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½È¸
+			System.out.println("0..Get Client Order Info MemberItemDao.java");
         	preparedStatement = connection.prepareStatement("SELECT mi.no, m.id, mi.order_date, mi.item_no, i.name, i.price FROM member_item mi INNER JOIN item i ON mi.item_no = i.no INNER JOIN member m ON mi.member_no = m.no WHERE mi.member_no = ?");
         	preparedStatement.setInt(1, member.getNo());
-        } else if(member.getLevel()==1) { //°ü¸®ÀÚ.. ¸ðµç ÁÖ¹®¸®½ºÆ® Á¶È¸
-        	System.out.println("1ÀÇ Á¶°Ç½ÇÇà MemberItemDao.java");
+        } else if(member.getLevel()==1) { //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.. ï¿½ï¿½ï¿½ ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½È¸
+        	System.out.println("1..Get Admin Order Info MemberItemDao.java");
         	preparedStatement = connection.prepareStatement("SELECT mi.no, m.id, mi.order_date, mi.item_no, i.name, i.price FROM member_item mi INNER JOIN item i ON mi.item_no = i.no INNER JOIN member m ON mi.member_no = m.no");
         }
         	

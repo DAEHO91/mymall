@@ -17,7 +17,7 @@ import com.test.mymall.service.ItemService;
 public class itemList extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doGet()¸Þ¼­µå itemList.java");
+		System.out.println("doGet() itemList.java");
 		ItemService itemService = new ItemService();
 		HttpSession session = request.getSession();
 		

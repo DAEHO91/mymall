@@ -8,15 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.test.mymall.dao.MemberDao;
 import com.test.mymall.service.MemberService;
 import com.test.mymall.vo.Member;
 
 @WebServlet("/LoginController")
 public class LoginController extends HttpServlet {
 
-	private MemberDao memberDao;
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doGet.... LoginController.java");
 		

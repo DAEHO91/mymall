@@ -3,7 +3,6 @@ package com.test.mymall.service;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +11,6 @@ import org.apache.ibatis.session.SqlSession;
 import com.test.mymal.commons.DBHelper;
 import com.test.mymall.dao.ItemDao;
 import com.test.mymall.dao.MemberItemDao;
-import com.test.mymall.vo.Item;
 import com.test.mymall.vo.MemberItem;
 
 public class ItemService {

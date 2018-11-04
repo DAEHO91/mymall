@@ -1,18 +1,10 @@
 package com.test.mymall.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.test.mymal.commons.DBHelper;
-import com.test.mymall.vo.Item;
 import com.test.mymall.vo.Member;
 
 public class ItemDao {

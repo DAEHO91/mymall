@@ -69,13 +69,14 @@ public class MemberService {
 			
 			//login check
 			if(check>=1) {
+				System.out.println("delete confirm success! .... MemberService.java");
 				checkResult = true;
 				memberItemDao.deleteMemberItem(sqlSession, member);
 				memberDao.deleteMember(sqlSession, member);
+				sqlSession.commit();
+			} else {
+				System.out.println("delete confirm fail! .... MemberService.java");
 			}
-			
-			sqlSession.commit();
-			
 
 		} catch(Exception e) {
 			try {

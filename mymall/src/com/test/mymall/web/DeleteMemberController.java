@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.test.mymall.dao.MemberDao;
 import com.test.mymall.service.MemberService;
 import com.test.mymall.vo.Member;
 

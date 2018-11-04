@@ -16,7 +16,7 @@
 	</select>
 	
 	<select id="adminOrderList"  parameterType="com.test.mymall.vo.Member" resultType="map">
-		"SELECT mi.no, m.id, mi.order_date, mi.item_no, i.name, i.price FROM member_item mi INNER JOIN item i ON mi.item_no = i.no INNER JOIN member m ON mi.member_no = m.no
+		SELECT mi.no, m.id, mi.order_date, mi.item_no, i.name, i.price FROM member_item mi INNER JOIN item i ON mi.item_no = i.no INNER JOIN member m ON mi.member_no = m.no
 	</select>
 
 	

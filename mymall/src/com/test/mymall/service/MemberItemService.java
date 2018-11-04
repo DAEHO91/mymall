@@ -4,10 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
-import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -25,16 +23,16 @@ public class MemberItemService {
 	ResultSet resultSet = null;
 	
 	
-	public ArrayList<HashMap<String, Object>> orderList(Member member) {
+	public List<Map<String, Object>> orderList(Member member) {
 		System.out.println("orderList  Method Access ... MemberItemService.java");
-		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		
 		
 		try {
 			sqlSession = DBHelper.getSqlSession();
 			
 			memberItemDao = new MemberItemDao();
-			//list = memberItemDao.orderList(sqlSession, member);
+			list = memberItemDao.orderList(sqlSession, member);
 			
 			
 		} catch (Exception e) {

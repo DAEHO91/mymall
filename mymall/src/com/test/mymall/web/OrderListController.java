@@ -3,6 +3,8 @@ package com.test.mymall.web;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,8 +26,7 @@ public class OrderListController extends HttpServlet {
 		Member member = (Member)session.getAttribute("loginMember");
 		MemberItemService memberItemService = new MemberItemService();
 		
-		// ȸ�������� �Է¹޾� �������ϰ�� ��� �ֹ����� ��ȸ, ���ϰ�� �ڽ��� �ֹ������� ��ȸ
-		ArrayList<HashMap<String, Object>> list = memberItemService.orderList(member);
+		List<Map<String, Object>> list = memberItemService.orderList(member);
 		
 		session.setAttribute("orderList", list);
 				

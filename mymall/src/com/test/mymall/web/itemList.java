@@ -1,8 +1,8 @@
 package com.test.mymall.web;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,9 +21,10 @@ public class itemList extends HttpServlet {
 		ItemService itemService = new ItemService();
 		HttpSession session = request.getSession();
 		
-		ArrayList<HashMap<String, Object>> list = itemService.itemList();
+		List<Map<String, Object>> list = itemService.itemList();
+		System.out.println(list+"<<<< itemList.java");
 		
-		session.setAttribute("list", list);
+		session.setAttribute("itemlist", list);
 
 		request.getRequestDispatcher("/WEB-INF/view/itemList.jsp").forward(request, response);
 	}

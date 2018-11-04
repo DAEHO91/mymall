@@ -11,8 +11,8 @@
 		SELECT no, id, pw, level FROM member WHERE id=#{id}
 	</select>
 	
-	<select id = "deleteCheckMember" parameterType="com.test.mymall.vo.Member" resultType="com.test.mymall.vo.Member">
-		SELECT id FROM member WHERE id=#{id} AND pw=#{pw}
+	<select id = "deleteCheckMember" parameterType="com.test.mymall.vo.Member" resultType="int">
+		SELECT count(*) FROM member WHERE id=#{id} AND pw=#{pw}
 	</select>
 	
 	<insert id = "insertMember" parameterType="com.test.mymall.vo.Member" >

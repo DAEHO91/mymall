@@ -1,9 +1,7 @@
 package com.test.mymall.service;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -58,28 +56,29 @@ public class MemberService {
 	
 	public boolean deleteMember(Member member) {
 		System.out.println("deleteMember  Method Access ... MemberService.java");
-		boolean check= false;
+		int check = 0;
+		boolean checkResult = false;
 		try {
 			sqlSession = DBHelper.getSqlSession();
-			// �ڵ�Ŀ��false
 			//sqlSession.setAutoCommit(false);
 
 			memberDao = new MemberDao();
 			memberItemDao = new MemberItemDao();
 
 			check = memberDao.deleteCheckMember(sqlSession, member);
+			
 			//login check
-			if(check) {
+			if(check>=1) {
+				checkResult = true;
 				memberItemDao.deleteMemberItem(sqlSession, member);
 				memberDao.deleteMember(sqlSession, member);
 			}
 			
 			sqlSession.commit();
-			System.out.println(check+"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<java");
+			
 
 		} catch(Exception e) {
 			try {
-				// ���� �߻��� �ѹ�..
 				sqlSession.rollback();
 			} finally {
 				sqlSession.close();
@@ -89,7 +88,7 @@ public class MemberService {
 			sqlSession.close();
 		}
 		
-		return check;
+		return checkResult;
 	}
 	
 	

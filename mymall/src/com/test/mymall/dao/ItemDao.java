@@ -6,35 +6,29 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
 import com.test.mymal.commons.DBHelper;
+import com.test.mymall.vo.Item;
+import com.test.mymall.vo.Member;
 
 public class ItemDao {
 	
-    Connection connection = null;
-    PreparedStatement preparedStatement = null;
-    ResultSet resultSet = null;
+	private static String namespace = "com.test.mymall.dao.ItemMapper";
 
-	
-	public List<HashMap<String, Object>> itemList(SqlSession sqlSession) throws SQLException {
-		System.out.println("itemList Method Access ItemDao.java");
-		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
+	public Member login(SqlSession sqlSession, Member member) {
+		System.out.println("login Method Access MemberDao.java");
+        return sqlSession.selectOne(namespace+".login", member);	
+	}
 
-		List<Item> list = sqlSession.selectList("com.test.mymall.dao.ItemMapper.selectItemList");
-		
-        preparedStatement = connection.prepareStatement("SELECT * FROM item");
-        resultSet=preparedStatement.executeQuery();
-
-        while(resultSet.next()) {
-        	HashMap<String, Object> map = new HashMap<String , Object>();
-            map.put("no", resultSet.getString("no"));
-            map.put("name", resultSet.getString("name"));
-            map.put("price", resultSet.getString("price"));
-            list.add(map);
-        }
-
+	public List<Map<String, Object>> itemList(SqlSession sqlSession) {
+		System.out.println("itemList Method Access itemDao.java");
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		list = sqlSession.selectList(namespace+".itemList");
+		System.out.println(list+"<<<< ItemDao.java");
 		return list;
 	}
 

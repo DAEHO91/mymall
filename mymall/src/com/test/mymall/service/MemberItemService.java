@@ -34,7 +34,7 @@ public class MemberItemService {
 			sqlSession = DBHelper.getSqlSession();
 			
 			memberItemDao = new MemberItemDao();
-			list = memberItemDao.orderList(sqlSession, member);
+			//list = memberItemDao.orderList(sqlSession, member);
 			
 			
 		} catch (Exception e) {

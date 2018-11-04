@@ -1,10 +1,11 @@
 package com.test.mymall.service;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -20,19 +21,19 @@ public class ItemService {
 	private MemberItemDao memberItemDao;
 	
 	SqlSession sqlSession = null;
-	Connection connection = null;
 	PreparedStatement preparedStatement = null;
 	ResultSet resultSet = null;
 	
-	public ArrayList<HashMap<String, Object>> itemList(){
+	public List<Map<String, Object>> itemList(){
 		System.out.println("itemList Method Access ... ItemService.java");
-		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		
 		try {
 			sqlSession = DBHelper.getSqlSession();
 			
 			itemDao = new ItemDao();
 			list = itemDao.itemList(sqlSession);
+			System.out.println(list+"<<<< ItemService.java");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -50,7 +51,7 @@ public class ItemService {
 			sqlSession = DBHelper.getSqlSession();
 			
 			memberItemDao = new MemberItemDao();
-			memberItemDao.order(sqlSession, memberItem);
+			//memberItemDao.order(sqlSession, memberItem);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

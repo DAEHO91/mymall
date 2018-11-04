@@ -14,8 +14,9 @@
 		<tr>
 			<th>번호</th><th>이름</th><th>가격</th><th>주문</th>
 		</tr>
+		<c:set var="num" value="0"/>
 		<!-- list 객체를 item이름으로 사용.. forEach는 자동증가 -->
-		<c:forEach var="item" items="${list}" varStatus="status">
+		<c:forEach var="item" items="${itemlist}" varStatus="status">
 		<tr>
 			<td>${item.get("no")}</td><!-- item.getNo() -->
 			<td>${item.get("name")}</td>

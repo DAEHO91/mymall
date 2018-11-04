@@ -26,10 +26,7 @@ public class ItemDao {
 
 	public List<Map<String, Object>> itemList(SqlSession sqlSession) {
 		System.out.println("itemList Method Access itemDao.java");
-		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-		list = sqlSession.selectList(namespace+".itemList");
-		System.out.println(list+"<<<< ItemDao.java");
-		return list;
+		return sqlSession.selectList(namespace+".itemList");
 	}
 
 }

@@ -33,7 +33,7 @@ public class ItemService {
 			
 			itemDao = new ItemDao();
 			list = itemDao.itemList(sqlSession);
-			System.out.println(list+"<<<< ItemService.java");
+
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -51,7 +51,9 @@ public class ItemService {
 			sqlSession = DBHelper.getSqlSession();
 			
 			memberItemDao = new MemberItemDao();
-			//memberItemDao.order(sqlSession, memberItem);
+			int result = memberItemDao.order(sqlSession, memberItem);
+			System.out.println(result + "<<-result! .....Order...ItemService.java");
+			sqlSession.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

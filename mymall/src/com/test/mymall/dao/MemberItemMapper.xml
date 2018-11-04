@@ -6,4 +6,8 @@
 	<delete id="deleteMemberItem" parameterType="com.test.mymall.vo.Member">
 		DELETE FROM member_item WHERE member_no=#{no}
 	</delete>
+	
+	<insert id="order" parameterType="com.test.mymall.vo.MemberItem">
+		INSERT INTO member_item (member_no, item_no, order_date) VALUE (#{member_no}, #{item_no}, now())
+	</insert>
 </mapper>

@@ -22,11 +22,9 @@ public class OrderController extends HttpServlet {
 		Member member = new Member();
 		MemberItem memberItem = new MemberItem();
 		ItemService itemService = new ItemService();
-		System.out.println(request.getParameter("itemNo")+"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 		
 		int itemNo = Integer.parseInt(request.getParameter("itemNo"));
 		member = (Member)session.getAttribute("loginMember");
-		System.out.println(member.getId()+"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 		memberItem.setItem_no(itemNo);
 		memberItem.setMember_no(member.getNo());
 		

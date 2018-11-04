@@ -17,21 +17,18 @@ public class MemberItemDao {
     Connection connection = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
+    
+    private static String namespace = "com.test.mymall.dao.MemberItemMapper";
 	
 	
-	public void deleteMemberItem(SqlSession sqlSession, Member member) throws SQLException {
+	public void deleteMemberItem(SqlSession sqlSession, Member member) {
 		System.out.println("deleteMemberItem Method Access MemberItemDao.java");
-		sqlSession.delete("com.test.mymall.dao.MemberItemMapper.deleteMemberItem", member);
+		sqlSession.delete(namespace+".deleteMemberItem", member);
 	}
 	
-	public void order(Connection connection, MemberItem memberItem) throws SQLException {
+	public int order(SqlSession sqlSession, MemberItem memberItem) {
 		System.out.println("order Method Access MemberItemDao.java");
-
-        preparedStatement = connection.prepareStatement("INSERT INTO member_item (member_no, item_no, order_date) VALUE (?, ?, now())");
-        preparedStatement.setInt(1, memberItem.getMember_no());
-        preparedStatement.setInt(2, memberItem.getItem_no());
-            
-        preparedStatement.executeUpdate();
+		return sqlSession.insert(namespace+".order", memberItem);
 	}
 	
 	public ArrayList<HashMap<String, Object>> orderList(Connection connection, Member member) throws SQLException {

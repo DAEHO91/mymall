@@ -21,6 +21,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   <mappers>
     <mapper resource="com/test/mymall/dao/MemberMapper.xml"/>
     <mapper resource="com/test/mymall/dao/ItemMapper.xml"/>
+    <mapper resource="com/test/mymall/dao/MemberItemMapper.xml"/>
   </mappers>
   
 </configuration>

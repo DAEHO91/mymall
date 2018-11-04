@@ -22,7 +22,6 @@ public class itemList extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		List<Map<String, Object>> list = itemService.itemList();
-		System.out.println(list+"<<<< itemList.java");
 		
 		session.setAttribute("itemlist", list);
 
